@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -21,8 +21,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".startActivity" />
-        <activity android:name=".reg_activity"
-    android:parentActivityName=".startActivity"></activity>
+        <activity
+            android:name=".reg_activity"
+            android:parentActivityName=".startActivity" />
+        <activity android:name=".login_activity"
+    android:parentActivityName=".startActivity"/>
     </application>
 
 </manifest>
