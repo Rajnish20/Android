@@ -1,10 +1,12 @@
 package com.example.android.chatapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +24,7 @@ public class reg_activity extends AppCompatActivity {
     private EditText mEmail;
     private EditText mPassword;
     private Button mCreateBtn;
+    private ProgressDialog mregProgress;
 
     private FirebaseAuth mAuth;
 
@@ -50,6 +53,7 @@ public class reg_activity extends AppCompatActivity {
         mEmail = (EditText)findViewById(R.id.email);
         mPassword = (EditText)findViewById(R.id.password);
         mCreateBtn = (Button)findViewById(R.id.crtbtn);
+        mregProgress = new ProgressDialog(this);
 
         mCreateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +63,15 @@ public class reg_activity extends AppCompatActivity {
                 String email = mEmail.getText().toString();
                 String password = mPassword.getText().toString();
 
-                register_user(display_name,email,password);
+                if(!TextUtils.isEmpty(display_name) || !TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)){
+                    mregProgress.setTitle("Registering User");
+                    mregProgress.setMessage("Please wait while we are creating your account");
+                    mregProgress.setCanceledOnTouchOutside(false);
+                    mregProgress.show();
+
+                    register_user(display_name,email,password);
+
+                }
             }
         });
     }
@@ -71,13 +83,17 @@ public class reg_activity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
 
+                    mregProgress.dismiss();
+
                     Intent main_intent = new Intent(reg_activity.this,MainActivity.class);
                     startActivity(main_intent);
                     finish();
 
                 }else{
 
-                    Toast.makeText(reg_activity.this,"You got some error",Toast.LENGTH_LONG).show();
+                    mregProgress.hide();
+
+                    Toast.makeText(reg_activity.this,"Cannot sign in. Please check the form and try again.",Toast.LENGTH_LONG).show();
                 }
 
             }
