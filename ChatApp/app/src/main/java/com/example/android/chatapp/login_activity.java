@@ -78,6 +78,7 @@ public class login_activity extends AppCompatActivity {
 
                     mloginProgress.dismiss();
                     Intent login_intent = new Intent(login_activity.this,MainActivity.class);
+                    login_intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(login_intent);
                     finish();
                 }else{

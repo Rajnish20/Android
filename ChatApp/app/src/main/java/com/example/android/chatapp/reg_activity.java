@@ -86,6 +86,7 @@ public class reg_activity extends AppCompatActivity {
                     mregProgress.dismiss();
 
                     Intent main_intent = new Intent(reg_activity.this,MainActivity.class);
+                    main_intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(main_intent);
                     finish();
 
