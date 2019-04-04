@@ -24,8 +24,10 @@
         <activity
             android:name=".reg_activity"
             android:parentActivityName=".startActivity" />
-        <activity android:name=".login_activity"
-    android:parentActivityName=".startActivity"/>
+        <activity
+            android:name=".login_activity"
+            android:parentActivityName=".startActivity" />
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 
 </manifest>
